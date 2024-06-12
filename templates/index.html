@@ -13,6 +13,17 @@
                             <h5 class="card-title">{{ empleado['nombre'] }} {{ empleado['apellido'] }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Nro. Documento: {{ empleado['nro_documento'] }}</h6>
                             <p class="card-text">Antigüedad: {{ empleado['antiguedad'] }} años</p>
+                            <form action="{{ url_for('calculate_salary') }}" method="POST">
+                                <input type="hidden" name="apellido" value="{{ empleado['apellido'] }}">
+                                <input type="hidden" name="nombre" value="{{ empleado['nombre'] }}">
+                                <input type="hidden" name="nro_documento" value="{{ empleado['nro_documento'] }}">
+                                <input type="hidden" name="antiguedad" value="{{ empleado['antiguedad'] }}">
+                                <div class="mb-3">
+                                    <label for="horas_trabajadas" class="form-label">Horas Trabajadas</label>
+                                    <input type="number" class="form-control" id="horas_trabajadas" name="horas_trabajadas" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Calcular Sueldo</button>
+                            </form>
                         </div>
                     </div>
                 </div>
