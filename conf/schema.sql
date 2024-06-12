@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS empleados;
+
+CREATE TABLE empleados (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    apellido TEXT NOT NULL,
+    nombre TEXT NOT NULL,
+    nro_documento TEXT NOT NULL,
+    antiguedad INTEGER NOT NULL
+);
