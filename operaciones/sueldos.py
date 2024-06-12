@@ -6,7 +6,7 @@ para llegar a tests de integración
 class Liquidacion():
 
     def __init__(self, 
-                    p_valor_hora = 5000, 
+                    p_valor_hora = 6000, 
                     p_pct_bonificacion = 8, 
                     p_pct_retenciones = 11, 
                     p_pct_obra_social = 3):
