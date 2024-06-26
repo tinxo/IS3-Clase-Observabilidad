@@ -16,8 +16,8 @@ app = Flask(__name__)
 def index():
     conn = get_db_connection()
     query = 'SELECT * FROM empleados'
-    conn.connect()
-    results = conn.execute(query).fetchall()
+    cnx_db = conn.connect()
+    results = cnx_db.execute(query).fetchall()
     conn.close()
     return render_template('index.html', empleados=results)
 
@@ -49,8 +49,8 @@ def init_db():
             antiguedad INTEGER NOT NULL
         );
     """
-    conn.connect()
-    conn.execute(query)
+    cnx_db = conn.connect()
+    cnx_db.execute(query)
     conn.close()
 
 def get_db_connection(): 
