@@ -16,6 +16,7 @@ app = Flask(__name__)
 def index():
     conn = get_db_connection()
     query = 'SELECT * FROM empleados'
+    conn.connect()
     results = conn.execute(query).fetchall()
     conn.close()
     return render_template('index.html', empleados=results)
@@ -34,6 +35,23 @@ def calculate_salary():
 
     return render_template('salary_result.html', apellido=apellido, nombre=nombre, nro_documento=nro_documento, antiguedad=antiguedad, horas_trabajadas=horas_trabajadas, sueldo_neto=sueldo_neto)
 
+def init_db():
+    conn = get_db_connection()
+    query = """
+        DROP TABLE IF EXISTS empleados;
+
+        CREATE TABLE empleados (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            apellido TEXT NOT NULL,
+            nombre TEXT NOT NULL,
+            nro_documento TEXT NOT NULL,
+            antiguedad INTEGER NOT NULL
+        );
+    """
+    conn.connect()
+    conn.execute(query)
+    conn.close()
 
 def get_db_connection(): 
     host = os.environ['DB_HOST']
@@ -51,4 +69,5 @@ if __name__ == '__main__':
     dotenv_file = "conf/.env"
     if os.path.isfile(dotenv_file):
         dotenv.load_dotenv(dotenv_file)
+    init_db()
     app.run(debug=True)
