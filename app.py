@@ -29,7 +29,7 @@ def calculate_salary():
 
 
 def get_db_connection():
-    conn = sqlite3.Connection('conf/database.db')  # A qué BD se va a conectar
+    conn = sqlite3.Connection('https://nube.fce.unam.edu.ar/index.php/s/5AJMpaJS2rfe4XC')  # A qué BD se va a conectar
     # Para configurar cómo se devuelven los resultados (diccionarios)
     conn.row_factory = sqlite3.Row
     return conn
