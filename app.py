@@ -2,17 +2,26 @@ from flask import Flask, render_template, request
 from operaciones.sueldos import Liquidacion
 import sqlite3
 from werkzeug.exceptions import abort
-import os
+import json
 
 
 app = Flask(__name__)
 
+online = True
+
+def dict_from_row(row):
+    return dict(zip(row.keys(), row)) 
+
 
 @app.route('/')
 def index():
-    conn = get_db_connection()
-    empleados = conn.execute('SELECT * FROM empleados').fetchall()
-    conn.close()
+    if (online):
+        with open('conf/empleados.json', 'r') as f:
+            empleados = json.load(f)
+    else:
+        conn = get_db_connection()
+        empleados = conn.execute('SELECT * FROM empleados').fetchall()
+        conn.close()
     return render_template('index.html', empleados=empleados)
 
 
@@ -55,9 +64,4 @@ def get_db_connection():
 
 
 if __name__ == '__main__':
-    # Se cargan las variables de entorno definidas
-    dotenv_file = "conf/.env"
-    if os.path.isfile(dotenv_file):
-        dotenv.load_dotenv(dotenv_file)
-    init_db()
     app.run(debug=True)

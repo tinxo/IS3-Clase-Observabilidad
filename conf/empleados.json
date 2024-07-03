@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "created": "2024-06-12 12:16:35",
+        "apellido": "Fulanito",
+        "nombre": "Cosme",
+        "nro_documento": "45321567",
+        "antiguedad": 5
+    },
+    {
+        "id": 2,
+        "created": "2024-06-12 12:16:35",
+        "apellido": "Simpson",
+        "nombre": "Homero",
+        "nro_documento": "24987654",
+        "antiguedad": 15
+    }
+]
